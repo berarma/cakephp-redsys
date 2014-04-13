@@ -1,0 +1,11 @@
+{
+    "name": "berarma/cakephp-sermepa",
+    "description": "CakePHP Sermepa Plugin",
+    "license": "GPL-2.0",
+    "authors": [
+        {
+            "name": "Bernat Arlandis",
+            "email": "berarma@hotmail.com"
+        }
+    ]
+}

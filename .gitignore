@@ -5,3 +5,17 @@ app/tmp/*
 app/[Cc]onfig/core.php
 app/[Cc]onfig/database.php
 !empty
+Config/local-config.php
+webroot/img/products/
+webroot/img/slides/
+Locale/*.pot
+Locale/*/LC_MESSAGES/*.mo
+webroot/cache_css
+webroot/cache_js
+Plugin/AssetCompress
+Plugin/DebugKit
+Plugin/Utils
+Vendor/autoload.php
+Vendor/composer
+Vendor/natxet
+Vendor/linkorb
