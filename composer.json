@@ -1,11 +1,18 @@
 {
     "name": "berarma/cakephp-sermepa",
     "description": "CakePHP Sermepa Plugin",
+    "type": "cakephp-plugin",
+    "keywords": ["cakephp", "sermepa", "tpv", "servired", "payments", "card"],
+    "homepage": "https://github.com/berarma/cakephp-sermepa",
     "license": "GPL-2.0",
     "authors": [
         {
             "name": "Bernat Arlandis",
             "email": "berarma@hotmail.com"
         }
-    ]
+    ],
+    "require": {
+        "php": ">=5.2.8",
+        "composer/installers": "*"
+    }
 }
