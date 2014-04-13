@@ -14,5 +14,11 @@
     "require": {
         "php": ">=5.2.8",
         "composer/installers": "*"
+    },
+    "extra": {
+        "installer-name": "Sermepa",
+        "installer-paths": {
+            "Plugin/Sermepa/": ["berarma/cakephp-sermepa"]
+        }
     }
 }
