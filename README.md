@@ -38,32 +38,32 @@ $config = array(
     ));
 ```
 
-Setting things up in the controller:
+Setting things up in the Controller:
 
 ```
-...
 public $components = array('Sermepa');
 public $helpers = array('Sermepa');
-...
 ```
 
-Initiating a transaction in you controller:
+Initiating a transaction in the Controller:
 
 ```
-...
 $this->Sermepa->createTransaction($orderId, $amount, '0');
-...
 ```
 
-Getting a notification in your controller:
+Rendering the form that sends the user to the TPV in the View:
+```
+<?php echo $this->Sermepa->renderForm(array('id' => 'sermepa_form', 'target' => '_blank')); ?>
+<?php echo $this->Html->scriptBlock('$( "#sermepa_form" ).submit();'); ?>
+```
+
+Getting a notification in the Controller:
 
 ```
-...
 $notification = $this->Sermepa->getNotification();
-...
 ```
 
-See the Test files to find examples.
+See the Test files to find more use examples.
 
 ## License
 
