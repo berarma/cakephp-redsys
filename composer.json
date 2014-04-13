@@ -16,9 +16,6 @@
         "composer/installers": "*"
     },
     "extra": {
-        "installer-name": "Sermepa",
-        "installer-paths": {
-            "Plugin/Sermepa/": ["berarma/cakephp-sermepa"]
-        }
+        "installer-name": "Sermepa"
     }
 }
