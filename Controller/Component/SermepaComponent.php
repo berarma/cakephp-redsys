@@ -53,7 +53,9 @@ class SermepaComponent extends Component {
 	protected $Controller;
 
 	public function __construct(ComponentCollection $collection, $settings = array()) {
-		$settings = $settings + Configure::read('Sermepa');
+		if (Configure::read('Sermepa')) {
+			$settings = $settings + Configure::read('Sermepa');
+		}
 		parent::__construct($collection, $settings);
 	}
 
