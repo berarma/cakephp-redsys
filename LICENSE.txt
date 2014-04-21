@@ -1,4 +1,10 @@
-This plugin is licensed under the GPL v2 license. This is a plugin, you're just required to share your modifications/fixes/improvements to it. You aren't required to relicense your own projects because you're using and/or redistributing this plugin with them.
+This plugin is licensed under the GPL v2 license. Most common uses of this
+plugin won't constitute a derived work, thus, you may use it and include it in
+your app independently of the license you've choosen for your code as long as
+the plugin itself is still distributed with its original license. But using
+this plugin from another plugin that provides modified or improved
+functionality may constitute a derived work and thus require you to use the
+same license for your plugin.
 
 -------------------------------------------------------------------------------
 GNU GENERAL PUBLIC LICENSE
