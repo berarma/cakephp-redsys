@@ -50,7 +50,7 @@ class SermepaComponent extends Component {
 
 	public $currency;
 
-	protected $Controller;
+	public $Controller;
 
 	public function __construct(ComponentCollection $collection, $settings = array()) {
 		if (Configure::read('Sermepa')) {
@@ -69,6 +69,9 @@ class SermepaComponent extends Component {
 		$this->Controller->request->params['sermepaData'] = $Sermepa->getPostData($order, $amount, $transactionType);
 	}
 
+/**
+ * @throws CakeException
+ */
 	public function getNotification() {
 		if (!$this->Controller->request->is('post')) {
 			throw new CakeException("Sermepa notification not using POST.");

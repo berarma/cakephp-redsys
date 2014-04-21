@@ -87,7 +87,6 @@ class SermepaComponentTest extends CakeTestCase {
 	}
 
 	public function testCreateTransactionWithStaticSettings() {
-
 		$this->SermepaComponent->createTransaction('100', '349812');
 		$this->assertEquals('0', $this->Controller->request->params['sermepaData']['Ds_Merchant_TransactionType']);
 		$this->assertEquals('000000000100', $this->Controller->request->params['sermepaData']['Ds_Merchant_Order']);
@@ -96,11 +95,9 @@ class SermepaComponentTest extends CakeTestCase {
 		$this->assertEquals('1', $this->Controller->request->params['sermepaData']['Ds_Merchant_ConsumerLanguage']);
 		$this->assertEquals('3f8daabbdd6efe028ea209ac992d0a4f34aea275', $this->Controller->params['sermepaData']['Ds_Merchant_MerchantSignature']);
 		$this->assertEquals('https://sis-t.redsys.es:25443/sis/realizarPago', $this->Controller->params['sermepaUrl']);
-
 	}
 
 	public function testCreateTransactionWithDynamicSettings() {
-
 		$this->SermepaComponent->serviceUrl = 'https://sis.redsys.es/sis/realizarPago';
 		$this->SermepaComponent->extendedSignature = true;
 		$this->SermepaComponent->consumerLanguage = '2';
@@ -113,11 +110,9 @@ class SermepaComponentTest extends CakeTestCase {
 		$this->assertEquals('2', $this->Controller->request->params['sermepaData']['Ds_Merchant_ConsumerLanguage']);
 		$this->assertEquals('https://sis.redsys.es/sis/realizarPago', $this->Controller->params['sermepaUrl']);
 		$this->assertEquals('59954c2bde3a39e484c6b640110b99f182802323', $this->Controller->params['sermepaData']['Ds_Merchant_MerchantSignature']);
-
 	}
 
 	public function testGetNotification() {
-
 		$_SERVER['REQUEST_METHOD'] = 'POST';
 		$this->Controller->request->data = $this->notification;
 		$notification = $this->SermepaComponent->getNotification();
@@ -137,25 +132,20 @@ class SermepaComponentTest extends CakeTestCase {
 		$this->assertEquals($this->notification['Ds_AuthorisationCode'], $notification->authorisationCode);
 		$this->assertEquals($this->notification['Ds_ConsumerLanguage'], $notification->consumerLanguage);
 		$this->assertEquals($this->notification['Ds_Card_Type'], $notification->cardType);
-
 	}
 
 	public function testGetNotificationPostException() {
-
 		$this->setExpectedException('CakeException', 'POST');
 		$this->Controller->request->data = $this->notification;
 		$notification = $this->SermepaComponent->getNotification();
-
 	}
 
 	public function testGetNotificationSignatureException() {
-
 		$this->setExpectedException('CakeException', 'signature');
 		$_SERVER['REQUEST_METHOD'] = 'POST';
 		$this->Controller->request->data = $this->notification;
 		$this->Controller->request->data['Ds_Signature'] = '';
 		$notification = $this->SermepaComponent->getNotification();
-
 	}
 
 }

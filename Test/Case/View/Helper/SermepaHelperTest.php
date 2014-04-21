@@ -60,7 +60,6 @@ class SermepaHelperTest extends CakeTestCase {
 	}
 
 	public function testRenderForm() {
-
 		$result = $this->Sermepa->renderForm();
 		$expected = array(
 			'form' => array('action' => $this->sermepaUrl, 'method' => 'post', 'id', 'accept-charset'),

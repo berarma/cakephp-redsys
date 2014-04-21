@@ -31,7 +31,7 @@ class SermepaHelper extends AppHelper {
 		$options['url'] = $this->request->params['sermepaUrl'];
 		$data = $this->request->params['sermepaData'];
 		$output = $this->Form->create($options);
-		foreach ($data as $key=>$value) {
+		foreach ($data as $key => $value) {
 			$output .= $this->Form->hidden($key, array('name' => $key, 'value' => $value));
 		}
 		$output .= $this->Form->end();
