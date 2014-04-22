@@ -18,6 +18,7 @@ matrix:
   include:
     - php: 5.4
       env:
+        - CAKE_VERSION=master
         - COVERALLS=1
     - php: 5.4
       env:
