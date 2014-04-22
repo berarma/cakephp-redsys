@@ -11,8 +11,7 @@ env:
     - REQUIRE=""
 
   matrix:
-    - CAKE_VERSION=2.4
-    - CAKE_VERSION=2.5
+    - CAKE_VERSION=master
 
 matrix:
   include:
