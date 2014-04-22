@@ -1,4 +1,6 @@
-# CakePHP Sermepa Plugin [![Build Status](https://travis-ci.org/berarma/cakephp-sermepa.svg?branch=master)](https://travis-ci.org/berarma/cakephp-sermepa) [![Coverage Status](https://coveralls.io/repos/berarma/cakephp-sermepa/badge.png?branch=master)](https://coveralls.io/r/berarma/cakephp-sermepa?branch=master)
+[![Build Status](https://travis-ci.org/berarma/cakephp-sermepa.svg?branch=master)](https://travis-ci.org/berarma/cakephp-sermepa) [![Coverage Status](https://coveralls.io/repos/berarma/cakephp-sermepa/badge.png?branch=master)](https://coveralls.io/r/berarma/cakephp-sermepa?branch=master)
+
+# CakePHP Sermepa Plugin
 
 With this plugin is possible to do online payments using the Sermepa/Redsýs TPV
 service.
