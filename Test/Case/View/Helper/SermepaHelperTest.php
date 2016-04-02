@@ -74,3 +74,4 @@ class SermepaHelperTest extends CakeTestCase {
 		$this->assertTags($result, $expected, true);
 	}
 }
+

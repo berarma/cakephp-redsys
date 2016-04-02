@@ -32,3 +32,4 @@ class AllSermepaPluginTest extends CakeTestSuite {
 	}
 
 }
+

@@ -149,3 +149,4 @@ class SermepaComponentTest extends CakeTestCase {
 	}
 
 }
+

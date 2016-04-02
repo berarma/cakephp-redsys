@@ -109,5 +109,5 @@ class Sermepa extends Object {
 		}
 		return $this->_notification;
 	}
-
 }
+
