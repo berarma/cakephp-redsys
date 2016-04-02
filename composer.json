@@ -17,5 +17,8 @@
     },
     "extra": {
         "installer-name": "Sermepa"
+    },
+    "require-dev": {
+        "cakephp/cakephp-codesniffer": "1.*"
     }
 }
