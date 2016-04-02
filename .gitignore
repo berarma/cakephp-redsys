@@ -15,7 +15,4 @@ webroot/cache_js
 Plugin/AssetCompress
 Plugin/DebugKit
 Plugin/Utils
-Vendor/autoload.php
-Vendor/composer
-Vendor/natxet
-Vendor/linkorb
+vendor
