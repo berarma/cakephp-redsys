@@ -52,6 +52,9 @@ class SermepaComponent extends Component {
 
 	public $Controller;
 
+/**
+ * {@inheritDoc}
+ */
 	public function __construct(ComponentCollection $collection, $settings = array()) {
 		if (Configure::read('Sermepa')) {
 			$settings = $settings + Configure::read('Sermepa');
@@ -59,10 +62,21 @@ class SermepaComponent extends Component {
 		parent::__construct($collection, $settings);
 	}
 
+/**
+ * {@inheritDoc}
+ */
 	public function startup(Controller $controller) {
 		$this->Controller = $controller;
 	}
 
+/**
+ * Starts new transaction
+ *
+ * @param string $order Order reference
+ * @param string $amount Transaction amount
+ * @param string $transactionType Type of transaction
+ * @return null
+ */
 	public function createTransaction($order, $amount, $transactionType = '0') {
 		$Sermepa = new Sermepa($this);
 		$this->Controller->request->params['sermepaUrl'] = $Sermepa->getPostUrl();
@@ -70,6 +84,9 @@ class SermepaComponent extends Component {
 	}
 
 /**
+ * Get notification data
+ *
+ * @return stdClass Notification data
  * @throws CakeException
  */
 	public function getNotification() {

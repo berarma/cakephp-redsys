@@ -27,6 +27,12 @@ class SermepaHelper extends AppHelper {
 
 	public $helpers = array('Form');
 
+/**
+ * Renders form
+ *
+ * @param array $options Form options
+ * @return string Form
+ */
 	public function renderForm($options = array()) {
 		$options['url'] = $this->request->params['sermepaUrl'];
 		$data = $this->request->params['sermepaData'];

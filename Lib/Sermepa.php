@@ -29,14 +29,32 @@ class Sermepa extends Object {
 
 	protected $_notification;
 
+/**
+ * Constructor
+ *
+ * @param array $settings Configuration settings
+ */
 	public function __construct($settings) {
 		$this->_settings = $settings;
 	}
 
+/**
+ * Returns the URL where the form must be sent
+ *
+ * @return string Server URL
+ */
 	public function getPostUrl() {
 		return $this->_settings->serviceUrl;
 	}
 
+/**
+ * Generate data for the form fields
+ *
+ * @param string $order Order reference
+ * @param string $amount Transfer amount
+ * @param int $transactionType Type of transaction
+ * @return array Form data
+ */
 	public function getPostData($order, $amount, $transactionType = 0) {
 		$order = str_pad($order, 12, '0', STR_PAD_LEFT);
 		if ($this->_settings->extendedSignature) {
@@ -61,6 +79,10 @@ class Sermepa extends Object {
 	}
 
 /**
+ * Processes notification data returned by the server
+ *
+ * @param array $data Notification data
+ * @return stdClass Object with processed data
  * @throws CakeException
  */
 	public function getNotificationData($data) {
