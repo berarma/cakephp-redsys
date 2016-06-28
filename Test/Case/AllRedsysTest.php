@@ -1,9 +1,9 @@
 <?php
 /**
  *
- * CakePHP Helper to interact with the Sermepa TPV service
+ * Redsys Plugin Test Suite
  *
- * Copyright 2014 Bernat Arlandis i Mañó
+ * Copyright 2016 Bernat Arlandis
  *
  * This package is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 as
@@ -18,31 +18,17 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
- * @copyright Copyright 2014 Bernat Arlandis i Mañó
+ * @copyright Copyright 2016 Bernat Arlandis
  * @link http://bernatarlandis.com
  * @license http://www.gnu.org/licenses/gpl-2.0.html GPLv2
  */
 
-class SermepaHelper extends AppHelper {
+class AllRedsysPluginTest extends CakeTestSuite {
 
-	public $helpers = array('Form');
-
-/**
- * Renders form
- *
- * @param array $options Form options
- * @return string Form
- */
-	public function renderForm($options = array()) {
-		$options['url'] = $this->request->params['sermepaUrl'];
-		$data = $this->request->params['sermepaData'];
-		$output = $this->Form->create($options);
-		foreach ($data as $key => $value) {
-			$output .= $this->Form->hidden($key, array('name' => $key, 'value' => $value));
-		}
-		$output .= $this->Form->end();
-		return $output;
+	public static function suite() {
+		$suite = new CakeTestSuite('All Redsys Plugin tests');
+		$suite->addTestDirectoryRecursive(App::pluginPath('Redsys') . 'Test' . DS . 'Case' . DS);
+		return $suite;
 	}
-
 }
 

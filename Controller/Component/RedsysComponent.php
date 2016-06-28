@@ -1,9 +1,9 @@
 <?php
 /**
  *
- * CakePHP Component to interact with the Sermepa TPV service
+ * CakePHP Component to interact with the Redsys TPV service
  *
- * Copyright 2014 Bernat Arlandis i Mañó
+ * Copyright 2016 Bernat Arlandis
  *
  * This package is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 as
@@ -18,49 +18,17 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
- * @copyright Copyright 2014 Bernat Arlandis i Mañó
+ * @copyright Copyright 2016 Bernat Arlandis
  * @link http://bernatarlandis.com
  * @license http://www.gnu.org/licenses/gpl-2.0.html GPLv2
  */
 
 App::uses('Component', 'Controller');
-App::uses('Sermepa', 'Sermepa.Lib');
+App::uses('Redsys', 'Redsys.Lib');
 
-class SermepaComponent extends Component {
-
-	public $serviceUrl;
-
-	public $merchantCode;
-
-	public $merchantName;
-
-	public $terminal;
-
-	public $secretKey;
-
-	public $extendedSignature;
-
-	public $merchantUrl;
-
-	public $urlOk;
-
-	public $urlKo;
-
-	public $consumerLanguage;
-
-	public $currency;
+class RedsysComponent extends Component {
 
 	public $Controller;
-
-/**
- * {@inheritDoc}
- */
-	public function __construct(ComponentCollection $collection, $settings = array()) {
-		if (Configure::read('Sermepa')) {
-			$settings = $settings + Configure::read('Sermepa');
-		}
-		parent::__construct($collection, $settings);
-	}
 
 /**
  * {@inheritDoc}
@@ -77,10 +45,12 @@ class SermepaComponent extends Component {
  * @param string $transactionType Type of transaction
  * @return null
  */
-	public function createTransaction($order, $amount, $transactionType = '0') {
-		$Sermepa = new Sermepa($this);
-		$this->Controller->request->params['sermepaUrl'] = $Sermepa->getPostUrl();
-		$this->Controller->request->params['sermepaData'] = $Sermepa->getPostData($order, $amount, $transactionType);
+	public function request($params) {
+		$Redsys = new Redsys($this->settings, $params);
+		$this->Controller->request->params['RedsysUrl'] = $Redsys->getUrl();
+		$this->Controller->request->params['RedsysParameters'] = $Redsys->getMessage();
+		$this->Controller->request->params['RedsysSignature'] = $Redsys->getSignature();
+		$this->Controller->request->params['RedsysSignatureVersion'] = $Redsys->getVersion();
 	}
 
 /**
@@ -89,13 +59,12 @@ class SermepaComponent extends Component {
  * @return stdClass Notification data
  * @throws CakeException
  */
-	public function getNotification() {
+	public function response() {
 		if (!$this->Controller->request->is('post')) {
-			throw new CakeException("Sermepa notification not using POST.");
+			throw new CakeException("Redsys notification not using POST.");
 		}
-		$Sermepa = new Sermepa($this);
-		return $Sermepa->getNotificationData($this->Controller->request->data);
+		$Redsys = new Redsys($this->settings, $this->Controller->request->data);
+		return $Redsys->getData();
 	}
-
 }
 

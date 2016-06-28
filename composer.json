@@ -1,9 +1,9 @@
 {
-    "name": "berarma/cakephp-sermepa",
-    "description": "CakePHP Sermepa Plugin",
+    "name": "berarma/cakephp-redsys",
+    "description": "CakePHP Redsys Plugin",
     "type": "cakephp-plugin",
-    "keywords": ["cakephp", "sermepa", "tpv", "servired", "payments", "card"],
-    "homepage": "https://github.com/berarma/cakephp-sermepa",
+    "keywords": ["cakephp", "redsys", "tpv", "servired", "payments", "card"],
+    "homepage": "https://github.com/berarma/cakephp-redsys",
     "license": "GPL-2.0",
     "authors": [
         {
@@ -15,10 +15,11 @@
         "php": ">=5.2.8",
         "composer/installers": "*"
     },
-    "extra": {
-        "installer-name": "Sermepa"
-    },
     "require-dev": {
-        "cakephp/cakephp-codesniffer": "1.*"
+        "cakephp/cakephp-codesniffer": "1.*",
+        "phpunit/phpunit": "*"
+    },
+    "extra": {
+        "installer-name": "Redsys"
     }
 }
