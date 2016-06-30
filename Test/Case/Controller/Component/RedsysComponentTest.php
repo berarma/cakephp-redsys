@@ -45,8 +45,8 @@ class RedsysComponentTest extends CakeTestCase {
 		'defaults' => [
 			'Ds_Merchant_Terminal' => '956',
 			'Ds_Merchant_Currency' => '978',
-			'Ds_Merchant_Code' => '000000083',
-			'Ds_Merchant_Url' => 'http://example.com/notification',
+			'Ds_Merchant_MerchantCode' => '000000083',
+			'Ds_Merchant_MerchantURL' => 'http://example.com/notification',
 		],
 	);
 
@@ -97,8 +97,8 @@ class RedsysComponentTest extends CakeTestCase {
 			'DS_MERCHANT_ORDER' => '349812',
 		]);
 		$this->assertEquals($this->settings['url'], $this->Controller->params['RedsysUrl']);
-		$this->assertEquals('eyJEU19NRVJDSEFOVF9BTU9VTlQiOiIxMDAiLCJEU19NRVJDSEFOVF9PUkRFUiI6IjM0OTgxMiIsIkRzX01lcmNoYW50X1Rlcm1pbmFsIjoiOTU2IiwiRHNfTWVyY2hhbnRfQ3VycmVuY3kiOiI5NzgiLCJEc19NZXJjaGFudF9Db2RlIjoiMDAwMDAwMDgzIiwiRHNfTWVyY2hhbnRfVXJsIjoiaHR0cDpcL1wvZXhhbXBsZS5jb21cL25vdGlmaWNhdGlvbiJ9', $this->Controller->request->params['RedsysParameters']);
-		$this->assertEquals('U23a2yuDScMgPkkcN7VGP8t+nDJhHPt/UtRed3ADQEM=', $this->Controller->params['RedsysSignature']);
+		$this->assertEquals('eyJEU19NRVJDSEFOVF9BTU9VTlQiOiIxMDAiLCJEU19NRVJDSEFOVF9PUkRFUiI6IjM0OTgxMiIsIkRzX01lcmNoYW50X1Rlcm1pbmFsIjoiOTU2IiwiRHNfTWVyY2hhbnRfQ3VycmVuY3kiOiI5NzgiLCJEc19NZXJjaGFudF9NZXJjaGFudENvZGUiOiIwMDAwMDAwODMiLCJEc19NZXJjaGFudF9NZXJjaGFudFVSTCI6Imh0dHA6XC9cL2V4YW1wbGUuY29tXC9ub3RpZmljYXRpb24ifQ==', $this->Controller->request->params['RedsysParameters']);
+		$this->assertEquals('R+7sDHIakXvroq31yg8dPAPLqg0WbaGS3tA2dT7iVcc=', $this->Controller->params['RedsysSignature']);
 		$this->assertEquals('HMAC_SHA256_V1', $this->Controller->params['RedsysSignatureVersion']);
 	}
 

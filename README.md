@@ -24,7 +24,7 @@ php composer.phar require berarma/cakephp-redsys
 
 ## Use
 
-Create your configuration like this:
+Create your configuration:
 
 ```php
 $config = array(
@@ -33,17 +33,21 @@ $config = array(
         'url' => 'https://sis-t.redsys.es:25443/sis/realizarPago', // Testing
         'secretKey' => 'QWERTYASDF0123456789',
         'defaults' => [
-            'DS_MERCHANT_CODE' => '000000001',
+            'DS_MERCHANT_MERCHANTCODE' => '000000001',
             'DS_MERCHANT_CURRENCY' => '978',
             'DS_MERCHANT_TRANSACTIONTYPE' => '0',
             'DS_MERCHANT_TERMINAL' => '001',
-            'DS_MERCHANT_URL' => 'http://example.com/notification',
+            'DS_MERCHANT_MERCHANTURL' => 'http://example.com/notification',
             'DS_MERCHANT_URLOK' => 'http://example.com/ok',
             'DS_MERCHANT_URLKO' => 'http://example.com/ko',
         ],
     )
 );
 ```
+
+This is a basic configuration example. The defaults section will be merged with
+any parameters passed in the requests. Please, read the Redsýs documentation to
+learn about all the optional parameters that can be used.
 
 Setting things up in the Controller:
 

@@ -39,8 +39,8 @@ class RedsysHelperTest extends CakeTestCase {
 		$Controller->request = new CakeRequest();
 		$Controller->request->params = array(
 			'RedsysUrl' => $this->redsysUrl,
-			'RedsysParameters' => 'eyJEU19NRVJDSEFOVF9BTU9VTlQiOiIxMDAiLCJEU19NRVJDSEFOVF9PUkRFUiI6IjM0OTgxMiIsIkRzX01lcmNoYW50X1Rlcm1pbmFsIjoiOTU2IiwiRHNfTWVyY2hhbnRfQ3VycmVuY3kiOiI5NzgiLCJEc19NZXJjaGFudF9Db2RlIjoiMDAwMDAwMDgzIiwiRHNfTWVyY2hhbnRfVXJsIjoiaHR0cDpcL1wvZXhhbXBsZS5jb21cL25vdGlmaWNhdGlvbiJ9',
-			'RedsysSignature' => 'U23a2yuDScMgPkkcN7VGP8t+nDJhHPt/UtRed3ADQEM=',
+			'RedsysParameters' => 'eyJEU19NRVJDSEFOVF9BTU9VTlQiOiIxMDAiLCJEU19NRVJDSEFOVF9PUkRFUiI6IjM0OTgxMiIsIkRzX01lcmNoYW50X1Rlcm1pbmFsIjoiOTU2IiwiRHNfTWVyY2hhbnRfQ3VycmVuY3kiOiI5NzgiLCJEc19NZXJjaGFudF9NZXJjaGFudENvZGUiOiIwMDAwMDAwODMiLCJEc19NZXJjaGFudF9NZXJjaGFudFVSTCI6Imh0dHA6XC9cL2V4YW1wbGUuY29tXC9ub3RpZmljYXRpb24ifQ',
+			'RedsysSignature' => 'R+7sDHIakXvroq31yg8dPAPLqg0WbaGS3tA2dT7iVcc=',
 			'RedsysSignatureVersion' => 'HMAC_SHA256_V1',
 		);
 		$View = new View($Controller);
@@ -56,8 +56,8 @@ class RedsysHelperTest extends CakeTestCase {
 		$result = $this->Redsys->renderForm();
 		$this->assertTags($result, array(
 			array('form' => array('action' => $this->redsysUrl, 'method' => 'post', 'id', 'accept-charset')),
-			array('input' => array('type' => 'hidden', 'id', 'name' => 'Ds_MerchantParameters', 'value' => 'eyJEU19NRVJDSEFOVF9BTU9VTlQiOiIxMDAiLCJEU19NRVJDSEFOVF9PUkRFUiI6IjM0OTgxMiIsIkRzX01lcmNoYW50X1Rlcm1pbmFsIjoiOTU2IiwiRHNfTWVyY2hhbnRfQ3VycmVuY3kiOiI5NzgiLCJEc19NZXJjaGFudF9Db2RlIjoiMDAwMDAwMDgzIiwiRHNfTWVyY2hhbnRfVXJsIjoiaHR0cDpcL1wvZXhhbXBsZS5jb21cL25vdGlmaWNhdGlvbiJ9')),
-			array('input' => array('type' => 'hidden', 'id', 'name' => 'Ds_Signature', 'value' => 'U23a2yuDScMgPkkcN7VGP8t+nDJhHPt/UtRed3ADQEM=')),
+			array('input' => array('type' => 'hidden', 'id', 'name' => 'Ds_MerchantParameters', 'value' => 'eyJEU19NRVJDSEFOVF9BTU9VTlQiOiIxMDAiLCJEU19NRVJDSEFOVF9PUkRFUiI6IjM0OTgxMiIsIkRzX01lcmNoYW50X1Rlcm1pbmFsIjoiOTU2IiwiRHNfTWVyY2hhbnRfQ3VycmVuY3kiOiI5NzgiLCJEc19NZXJjaGFudF9NZXJjaGFudENvZGUiOiIwMDAwMDAwODMiLCJEc19NZXJjaGFudF9NZXJjaGFudFVSTCI6Imh0dHA6XC9cL2V4YW1wbGUuY29tXC9ub3RpZmljYXRpb24ifQ')),
+			array('input' => array('type' => 'hidden', 'id', 'name' => 'Ds_Signature', 'value' => 'R+7sDHIakXvroq31yg8dPAPLqg0WbaGS3tA2dT7iVcc=')),
 			array('input' => array('type' => 'hidden', 'id', 'name' => 'Ds_SignatureVersion', 'value' => 'HMAC_SHA256_V1')),
 			'/form',
 		));
