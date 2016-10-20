@@ -56,7 +56,7 @@ class RedsysComponent extends Component {
 /**
  * Get notification data
  *
- * @return stdClass Notification data
+ * @return Redsys Redsys object
  * @throws CakeException
  */
 	public function response() {
@@ -64,7 +64,7 @@ class RedsysComponent extends Component {
 			throw new CakeException("Redsys notification not using POST.");
 		}
 		$Redsys = new Redsys($this->settings, $this->Controller->request->data);
-		return $Redsys->getData();
+		return $Redsys;
 	}
 }
 

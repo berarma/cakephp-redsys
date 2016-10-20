@@ -106,21 +106,21 @@ class RedsysComponentTest extends CakeTestCase {
 		$_SERVER['REQUEST_METHOD'] = 'POST';
 		$this->Controller->request->data = $this->response;
 		$response = $this->RedsysComponent->response();
-		$this->assertEquals($this->responseParams['Ds_Date'], $response['Ds_Date']);
-		$this->assertEquals($this->responseParams['Ds_Hour'], $response['Ds_Hour']);
-		$this->assertEquals($this->responseParams['Ds_Amount'], $response['Ds_Amount']);
-		$this->assertEquals($this->responseParams['Ds_Currency'], $response['Ds_Currency']);
-		$this->assertEquals($this->responseParams['Ds_Order'], $response['Ds_Order']);
-		$this->assertEquals($this->responseParams['Ds_MerchantCode'], $response['Ds_MerchantCode']);
-		$this->assertEquals($this->responseParams['Ds_Terminal'], $response['Ds_Terminal']);
-		$this->assertEquals($this->responseParams['Ds_Response'], $response['Ds_Response']);
-		$this->assertEquals($this->responseParams['Ds_MerchantData'], $response['Ds_MerchantData']);
-		$this->assertEquals($this->responseParams['Ds_SecurePayment'], $response['Ds_SecurePayment']);
-		$this->assertEquals($this->responseParams['Ds_TransactionType'], $response['Ds_TransactionType']);
-		$this->assertEquals($this->responseParams['Ds_Card_Country'], $response['Ds_Card_Country']);
-		$this->assertEquals($this->responseParams['Ds_AuthorisationCode'], $response['Ds_AuthorisationCode']);
-		$this->assertEquals($this->responseParams['Ds_ConsumerLanguage'], $response['Ds_ConsumerLanguage']);
-		$this->assertEquals($this->responseParams['Ds_Card_Type'], $response['Ds_Card_Type']);
+		$this->assertEquals($this->responseParams['Ds_Date'], $response->get('Ds_Date'));
+		$this->assertEquals($this->responseParams['Ds_Hour'], $response->get('Ds_Hour'));
+		$this->assertEquals($this->responseParams['Ds_Amount'], $response->get('Ds_Amount'));
+		$this->assertEquals($this->responseParams['Ds_Currency'], $response->get('Ds_Currency'));
+		$this->assertEquals($this->responseParams['Ds_Order'], $response->get('Ds_Order'));
+		$this->assertEquals($this->responseParams['Ds_MerchantCode'], $response->get('Ds_MerchantCode'));
+		$this->assertEquals($this->responseParams['Ds_Terminal'], $response->get('Ds_Terminal'));
+		$this->assertEquals($this->responseParams['Ds_Response'], $response->get('Ds_Response'));
+		$this->assertEquals($this->responseParams['Ds_MerchantData'], $response->get('Ds_MerchantData'));
+		$this->assertEquals($this->responseParams['Ds_SecurePayment'], $response->get('Ds_SecurePayment'));
+		$this->assertEquals($this->responseParams['Ds_TransactionType'], $response->get('Ds_TransactionType'));
+		$this->assertEquals($this->responseParams['Ds_Card_Country'], $response->get('Ds_Card_Country'));
+		$this->assertEquals($this->responseParams['Ds_AuthorisationCode'], $response->get('Ds_AuthorisationCode'));
+		$this->assertEquals($this->responseParams['Ds_ConsumerLanguage'], $response->get('Ds_ConsumerLanguage'));
+		$this->assertEquals($this->responseParams['Ds_Card_Type'], $response->get('Ds_Card_Type'));
 	}
 
 	public function testPostException() {

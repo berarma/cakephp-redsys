@@ -39,39 +39,16 @@ class Redsys extends Object {
 				throw new Exception("Redsys: invalid signature version.");
 			}
 			$this->message = $params['Ds_MerchantParameters'];
+			$this->params = json_decode(base64_decode($this->message), true);
 			if ($this->hash($this->message) !== $params['Ds_Signature']) {
 				throw new Exception("Redsys: invalid signature.");
 			}
-			$this->params = json_decode(base64_decode($this->message), true);
 		} else {
 			if (isset($this->settings['defaults'])) {
 				$params += $this->settings['defaults'];
 			}
 			$this->params = $params;
 			$this->message = base64_encode(json_encode($this->params));
-		}
-	}
-
-	protected function hash($message, $key = null)
-	{
-		if ($key === null) {
-			$key = $this->settings['secretKey'];
-		}
-		$iv = str_repeat("\0", 8);
-		$key = mcrypt_encrypt(MCRYPT_3DES, base64_decode($key), $this->getOrder(), MCRYPT_MODE_CBC, $iv);
-		return base64_encode(hash_hmac('sha256', $this->message, $key, true));
-	}
-
-	protected function getOrder()
-	{
-		if (!empty($this->params['DS_MERCHANT_ORDER'])){
-			return $this->params['DS_MERCHANT_ORDER'];
-		} elseif (!empty($this->params['Ds_Merchant_Order'])) {
-			return $this->params['Ds_Merchant_Order'];
-		} elseif (!empty($this->params['DS_ORDER'])) {
-			return $this->params['DS_ORDER'];
-		} else {
-			return $this->params['Ds_Order'];
 		}
 	}
 
@@ -95,9 +72,45 @@ class Redsys extends Object {
 		return $this->hash($this->message);
 	}
 
+	public function get($param)
+	{
+		$param = ucwords($param, '_');
+		if (array_key_exists($param, $this->params)) {
+			return $this->params[$param];
+		}
+		$param = strtoupper($param);
+		if (array_key_exists($param, $this->params)) {
+			return $this->params[$param];
+		}
+		return null;
+	}
+
 	public function getData()
 	{
 		return $this->params;
+	}
+
+	protected function hash($message, $key = null)
+	{
+		if ($key === null) {
+			$key = $this->settings['secretKey'];
+		}
+		$iv = str_repeat("\0", 8);
+		$key = mcrypt_encrypt(MCRYPT_3DES, base64_decode($key), $this->getOrder(), MCRYPT_MODE_CBC, $iv);
+		return base64_encode(hash_hmac('sha256', $this->message, $key, true));
+	}
+
+	protected function getOrder()
+	{
+		$order = $this->get('DS_MERCHANT_ORDER');
+		if ($order !== null) {
+			return $order;
+		}
+		$order = $this->get('DS_ORDER');
+		if ($order !== null){
+			return $order;
+		}
+		return null;
 	}
 }
 
