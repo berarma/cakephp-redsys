@@ -52,8 +52,8 @@ learn about all the optional parameters that can be used.
 Setting things up in the Controller:
 
 ```php
-public $components = array('Redsys');
-public $helpers = array('Redsys');
+public $components = array('Redsys.Redsys');
+public $helpers = array('Redsys.Redsys');
 ```
 
 Initiating a transaction in the Controller:
@@ -76,6 +76,12 @@ Getting the response in the Controller:
 
 ```php
 $response = $this->Redsys->response();
+```
+
+The parameters from the response can then be accessed with:
+
+```php
+$response->get('DS_ORDER');
 ```
 
 See the Test files to find more use examples.
