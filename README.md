@@ -45,7 +45,7 @@ $config = array(
 );
 ```
 
-This is a basic configuration example. The defaults section will be merged with
+This is a basic configuration example. The defaults array will be merged with
 any parameters passed in the requests. Please, read the Redsýs documentation to
 learn about all the optional parameters that can be used.
 
@@ -85,6 +85,20 @@ $response->get('DS_ORDER');
 ```
 
 See the Test files to find more use examples.
+
+## Case sensitivity of parameters
+
+The specification states that parameter names should use upper case or a mixed
+style of CamelCase and underline characters. Since the mixed
+CamelCase/underline style is confusing to say the least, and having 2 different
+naming styles added to that confusion, I've decided to use the upper case style
+everywhere. That means all parameter names feeded to this plugin are converted
+to upper case, it doesn't matter how they were.
+
+## TODO
+
+This plugin is a work in progress. You should expect compatibility breaking
+changes.
 
 ## License
 
