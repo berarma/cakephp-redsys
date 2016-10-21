@@ -43,10 +43,10 @@ class RedsysComponentTest extends CakeTestCase {
 		//'url' => 'https://sis.redsys.es/sis/realizarPago',
 		'secretKey' => 'Mk9m98IfEblmPfrpsawt7BmxObt98Jev',
 		'defaults' => [
-			'Ds_Merchant_Terminal' => '956',
-			'Ds_Merchant_Currency' => '978',
-			'Ds_Merchant_MerchantCode' => '000000083',
-			'Ds_Merchant_MerchantURL' => 'http://example.com/notification',
+			'DS_MERCHANT_TERMINAL' => '956',
+			'DS_MERCHANT_CURRENCY' => '978',
+			'DS_MERCHANT_MERCHANTCODE' => '000000083',
+			'DS_MERCHANT_MERCHANTURL' => 'http://example.com/notification',
 		],
 	);
 
@@ -97,8 +97,8 @@ class RedsysComponentTest extends CakeTestCase {
 			'DS_MERCHANT_ORDER' => '349812',
 		]);
 		$this->assertEquals($this->settings['url'], $this->Controller->params['RedsysUrl']);
-		$this->assertEquals('eyJEU19NRVJDSEFOVF9BTU9VTlQiOiIxMDAiLCJEU19NRVJDSEFOVF9PUkRFUiI6IjM0OTgxMiIsIkRzX01lcmNoYW50X1Rlcm1pbmFsIjoiOTU2IiwiRHNfTWVyY2hhbnRfQ3VycmVuY3kiOiI5NzgiLCJEc19NZXJjaGFudF9NZXJjaGFudENvZGUiOiIwMDAwMDAwODMiLCJEc19NZXJjaGFudF9NZXJjaGFudFVSTCI6Imh0dHA6XC9cL2V4YW1wbGUuY29tXC9ub3RpZmljYXRpb24ifQ==', $this->Controller->request->params['RedsysParameters']);
-		$this->assertEquals('R+7sDHIakXvroq31yg8dPAPLqg0WbaGS3tA2dT7iVcc=', $this->Controller->params['RedsysSignature']);
+		$this->assertEquals('eyJEU19NRVJDSEFOVF9BTU9VTlQiOiIxMDAiLCJEU19NRVJDSEFOVF9PUkRFUiI6IjM0OTgxMiIsIkRTX01FUkNIQU5UX1RFUk1JTkFMIjoiOTU2IiwiRFNfTUVSQ0hBTlRfQ1VSUkVOQ1kiOiI5NzgiLCJEU19NRVJDSEFOVF9NRVJDSEFOVENPREUiOiIwMDAwMDAwODMiLCJEU19NRVJDSEFOVF9NRVJDSEFOVFVSTCI6Imh0dHA6XC9cL2V4YW1wbGUuY29tXC9ub3RpZmljYXRpb24ifQ==', $this->Controller->request->params['RedsysParameters']);
+		$this->assertEquals('NfsLlcmorHgEQhqQxXr3N7QJcXftpIGFiEXCYHQGTLw=', $this->Controller->params['RedsysSignature']);
 		$this->assertEquals('HMAC_SHA256_V1', $this->Controller->params['RedsysSignatureVersion']);
 	}
 
@@ -106,21 +106,21 @@ class RedsysComponentTest extends CakeTestCase {
 		$_SERVER['REQUEST_METHOD'] = 'POST';
 		$this->Controller->request->data = $this->response;
 		$response = $this->RedsysComponent->response();
-		$this->assertEquals($this->responseParams['Ds_Date'], $response->get('Ds_Date'));
-		$this->assertEquals($this->responseParams['Ds_Hour'], $response->get('Ds_Hour'));
-		$this->assertEquals($this->responseParams['Ds_Amount'], $response->get('Ds_Amount'));
-		$this->assertEquals($this->responseParams['Ds_Currency'], $response->get('Ds_Currency'));
-		$this->assertEquals($this->responseParams['Ds_Order'], $response->get('Ds_Order'));
-		$this->assertEquals($this->responseParams['Ds_MerchantCode'], $response->get('Ds_MerchantCode'));
-		$this->assertEquals($this->responseParams['Ds_Terminal'], $response->get('Ds_Terminal'));
-		$this->assertEquals($this->responseParams['Ds_Response'], $response->get('Ds_Response'));
-		$this->assertEquals($this->responseParams['Ds_MerchantData'], $response->get('Ds_MerchantData'));
-		$this->assertEquals($this->responseParams['Ds_SecurePayment'], $response->get('Ds_SecurePayment'));
-		$this->assertEquals($this->responseParams['Ds_TransactionType'], $response->get('Ds_TransactionType'));
-		$this->assertEquals($this->responseParams['Ds_Card_Country'], $response->get('Ds_Card_Country'));
-		$this->assertEquals($this->responseParams['Ds_AuthorisationCode'], $response->get('Ds_AuthorisationCode'));
-		$this->assertEquals($this->responseParams['Ds_ConsumerLanguage'], $response->get('Ds_ConsumerLanguage'));
-		$this->assertEquals($this->responseParams['Ds_Card_Type'], $response->get('Ds_Card_Type'));
+		$this->assertEquals($this->responseParams['Ds_Date'], $response->get('DS_DATE'));
+		$this->assertEquals($this->responseParams['Ds_Hour'], $response->get('DS_HOUR'));
+		$this->assertEquals($this->responseParams['Ds_Amount'], $response->get('DS_AMOUNT'));
+		$this->assertEquals($this->responseParams['Ds_Currency'], $response->get('DS_CURRENCY'));
+		$this->assertEquals($this->responseParams['Ds_Order'], $response->get('DS_ORDER'));
+		$this->assertEquals($this->responseParams['Ds_MerchantCode'], $response->get('DS_MERCHANTCODE'));
+		$this->assertEquals($this->responseParams['Ds_Terminal'], $response->get('DS_TERMINAL'));
+		$this->assertEquals($this->responseParams['Ds_Response'], $response->get('DS_RESPONSE'));
+		$this->assertEquals($this->responseParams['Ds_MerchantData'], $response->get('DS_MERCHANTDATA'));
+		$this->assertEquals($this->responseParams['Ds_SecurePayment'], $response->get('DS_SECUREPAYMENT'));
+		$this->assertEquals($this->responseParams['Ds_TransactionType'], $response->get('DS_TRANSACTIONTYPE'));
+		$this->assertEquals($this->responseParams['Ds_Card_Country'], $response->get('DS_CARD_COUNTRY'));
+		$this->assertEquals($this->responseParams['Ds_AuthorisationCode'], $response->get('DS_AUTHORISATIONCODE'));
+		$this->assertEquals($this->responseParams['Ds_ConsumerLanguage'], $response->get('DS_CONSUMERLANGUAGE'));
+		$this->assertEquals($this->responseParams['Ds_Card_Type'], $response->get('DS_CARD_TYPE'));
 	}
 
 	public function testPostException() {

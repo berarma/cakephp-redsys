@@ -39,7 +39,7 @@ class Redsys extends Object {
 				throw new Exception("Redsys: invalid signature version.");
 			}
 			$this->message = $params['Ds_MerchantParameters'];
-			$this->params = json_decode(base64_decode($this->message), true);
+			$this->params = array_change_key_case(json_decode(base64_decode($this->message), true), CASE_UPPER);
 			if ($this->hash($this->message) !== $params['Ds_Signature']) {
 				throw new Exception("Redsys: invalid signature.");
 			}
@@ -47,7 +47,7 @@ class Redsys extends Object {
 			if (isset($this->settings['defaults'])) {
 				$params += $this->settings['defaults'];
 			}
-			$this->params = $params;
+			$this->params = array_change_key_case($params, CASE_UPPER);
 			$this->message = base64_encode(json_encode($this->params));
 		}
 	}
@@ -74,12 +74,8 @@ class Redsys extends Object {
 
 	public function get($param)
 	{
-		$param = ucwords($param, '_');
-		if (array_key_exists($param, $this->params)) {
-			return $this->params[$param];
-		}
 		$param = strtoupper($param);
-		if (array_key_exists($param, $this->params)) {
+		if (isset($this->params[$param])) {
 			return $this->params[$param];
 		}
 		return null;
