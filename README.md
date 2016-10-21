@@ -10,9 +10,9 @@ This plugin enables online payments using the Redsýs TPV service.
 
 ## Installation
 
-* Copy or clone the files to `app/plugins/Redsys`
-* Load the plugin in `app/Config/bootstrap.php`, use `CakePlugin::loadAll();`
-  or `CakePlugin::load('Redsys');`
+* Copy or clone the files to `app/Plugin/Redsys`
+* Load the plugin in `app/Config/bootstrap.php`. Append `CakePlugin::loadAll();`
+  or `CakePlugin::load('Redsys');` at the end of the file.
 
 ### Using Composer
 
