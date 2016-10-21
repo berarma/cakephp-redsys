@@ -97,7 +97,7 @@ class Redsys extends Object {
 		}
 		$iv = str_repeat("\0", 8);
 		$key = mcrypt_encrypt(MCRYPT_3DES, base64_decode($key), $this->getOrder(), MCRYPT_MODE_CBC, $iv);
-		return base64_encode(hash_hmac('sha256', $this->message, $key, true));
+		return base64_encode(hash_hmac('sha256', $message, $key, true));
 	}
 
 	protected function getOrder()

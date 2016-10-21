@@ -70,7 +70,7 @@ class RedsysComponentTest extends CakeTestCase {
 
 	public $response = array(
 		'Ds_SignatureVersion' => 'HMAC_SHA256_V1',
-		'Ds_Signature' => 'CZmqB/GmzfwvpvvJVbx/auo6zrFAx8pPd1+0pzc0bvQ=',
+		'Ds_Signature' => 'IVHvFC2/y+cyq45xbB9NIhCRUm7fYZLT0uNXcNEdefQ=',
 		'Ds_MerchantParameters' => '',
 	);
 
