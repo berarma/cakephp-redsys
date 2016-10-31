@@ -30,6 +30,13 @@ class RedsysComponent extends Component {
 
 	public $Controller;
 
+	public function __construct(ComponentCollection $collection, $settings = array()) {
+		if (Configure::check('Redsys')) {
+			$settings += Configure::read('Redsys');
+		}
+		parent::__construct($collection, $settings);
+	}
+
 /**
  * {@inheritDoc}
  */
