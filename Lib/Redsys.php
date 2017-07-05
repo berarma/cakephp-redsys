@@ -39,8 +39,8 @@ class Redsys extends Object {
 				throw new Exception("Redsys: invalid signature version.");
 			}
 			$this->message = $params['Ds_MerchantParameters'];
-			$this->params = array_change_key_case(json_decode(base64_decode($this->message), true), CASE_UPPER);
-			if ($this->hash($this->message) !== $params['Ds_Signature']) {
+			$this->params = array_change_key_case(json_decode($this->decodeBase64url($this->message), true), CASE_UPPER);
+			if ($this->hash($this->message) !== $this->decodeBase64url($params['Ds_Signature'])) {
 				throw new Exception("Redsys: invalid signature.");
 			}
 		} else {
@@ -48,7 +48,7 @@ class Redsys extends Object {
 				$params += $this->settings['defaults'];
 			}
 			$this->params = array_change_key_case($params, CASE_UPPER);
-			$this->message = base64_encode(json_encode($this->params));
+			$this->message = $this->encodeBase64url(json_encode($this->params));
 		}
 	}
 
@@ -69,7 +69,7 @@ class Redsys extends Object {
 
 	public function getSignature()
 	{
-		return $this->hash($this->message);
+		return $this->encodeBase64url($this->hash($this->message));
 	}
 
 	public function get($param)
@@ -92,8 +92,8 @@ class Redsys extends Object {
 			$key = $this->settings['secretKey'];
 		}
 		$iv = str_repeat("\0", 8);
-		$key = mcrypt_encrypt(MCRYPT_3DES, base64_decode($key), $this->getOrder(), MCRYPT_MODE_CBC, $iv);
-		return base64_encode(hash_hmac('sha256', $message, $key, true));
+		$key = mcrypt_encrypt(MCRYPT_3DES, $this->decodeBase64url($key), $this->getOrder(), MCRYPT_MODE_CBC, $iv);
+		return hash_hmac('sha256', $message, $key, true);
 	}
 
 	protected function getOrder()
@@ -107,6 +107,16 @@ class Redsys extends Object {
 			return $order;
 		}
 		return null;
+	}
+
+	protected function encodeBase64url($data)
+	{
+		return strtr(base64_encode($data), '+/', '-_');
+	}
+
+	protected function decodeBase64url($data)
+	{
+		return base64_decode(strtr($data, '-_', '+/'));
 	}
 }
 

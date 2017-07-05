@@ -70,13 +70,13 @@ class RedsysComponentTest extends CakeTestCase {
 
 	public $response = array(
 		'Ds_SignatureVersion' => 'HMAC_SHA256_V1',
-		'Ds_Signature' => 'IVHvFC2/y+cyq45xbB9NIhCRUm7fYZLT0uNXcNEdefQ=',
+		'Ds_Signature' => 'IVHvFC2_y-cyq45xbB9NIhCRUm7fYZLT0uNXcNEdefQ=',
 		'Ds_MerchantParameters' => '',
 	);
 
 	public function setUp() {
 		parent::setUp();
-		$this->response['Ds_MerchantParameters'] = base64_encode(json_encode($this->responseParams));
+		$this->response['Ds_MerchantParameters'] = strtr(base64_encode(json_encode($this->responseParams)), '+/', '-_');
 		$Collection = new ComponentCollection();
 		$this->RedsysComponent = new RedsysComponent($Collection, $this->settings);
 		$CakeRequest = new CakeRequest();
