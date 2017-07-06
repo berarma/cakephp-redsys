@@ -48,7 +48,7 @@ class Redsys extends Object {
 				$params += $this->settings['defaults'];
 			}
 			$this->params = array_change_key_case($params, CASE_UPPER);
-			$this->message = $this->encodeBase64url(json_encode($this->params));
+			$this->message = base64_encode(json_encode($this->params));
 		}
 	}
 
@@ -69,7 +69,7 @@ class Redsys extends Object {
 
 	public function getSignature()
 	{
-		return $this->encodeBase64url($this->hash($this->message));
+		return base64_encode($this->hash($this->message));
 	}
 
 	public function get($param)
@@ -89,10 +89,10 @@ class Redsys extends Object {
 	protected function hash($message, $key = null)
 	{
 		if ($key === null) {
-			$key = $this->settings['secretKey'];
+			$key = base64_decode($this->settings['secretKey']);
 		}
 		$iv = str_repeat("\0", 8);
-		$key = mcrypt_encrypt(MCRYPT_3DES, $this->decodeBase64url($key), $this->getOrder(), MCRYPT_MODE_CBC, $iv);
+		$key = mcrypt_encrypt(MCRYPT_3DES, $key, $this->getOrder(), MCRYPT_MODE_CBC, $iv);
 		return hash_hmac('sha256', $message, $key, true);
 	}
 
