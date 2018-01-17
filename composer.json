@@ -1,10 +1,10 @@
 {
     "name": "berarma/cakephp-redsys",
-    "description": "CakePHP Redsys Plugin",
+    "description": "Redsys plugin for CakePHP",
     "type": "cakephp-plugin",
+    "license": "GPL-2.0",
     "keywords": ["cakephp", "redsys", "tpv", "servired", "payments", "card"],
     "homepage": "https://github.com/berarma/cakephp-redsys",
-    "license": "GPL-2.0",
     "authors": [
         {
             "name": "Bernat Arlandis",
@@ -12,14 +12,20 @@
         }
     ],
     "require": {
-        "php": ">=5.2.8",
-        "composer/installers": "*"
+        "cakephp/cakephp": "^3.4"
     },
     "require-dev": {
-        "cakephp/cakephp-codesniffer": "1.*",
-        "phpunit/phpunit": "*"
+        "phpunit/phpunit": "^5.7|^6.0"
     },
-    "extra": {
-        "installer-name": "Redsys"
+    "autoload": {
+        "psr-4": {
+            "Berarma\\Redsys\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Berarma\\Redsys\\Test\\": "tests",
+            "Cake\\Test\\": "./vendor/cakephp/cakephp/tests"
+        }
     }
 }

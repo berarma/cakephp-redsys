@@ -1,25 +1,21 @@
 [![Build Status](https://travis-ci.org/berarma/cakephp-redsys.svg?branch=master)](https://travis-ci.org/berarma/cakephp-redsys) [![Coverage Status](https://coveralls.io/repos/berarma/cakephp-redsys/badge.png?branch=master)](https://coveralls.io/r/berarma/cakephp-redsys?branch=master)
 
-# CakePHP Redsys Plugin
+# Redsys plugin for CakePHP
 
 This plugin enables online payments using the Redsýs TPV service.
 
 ## Requirements
 
-* CakePHP 2.x
+* CakePHP 3.4
 
 ## Installation
 
-* Copy or clone the files to `app/Plugin/Redsys`
-* Load the plugin in `app/Config/bootstrap.php`. Append `CakePlugin::loadAll();`
-  or `CakePlugin::load('Redsys');` at the end of the file.
+You can install this plugin into your CakePHP application using [composer](http://getcomposer.org).
 
-### Using Composer
+The recommended way to install composer packages is:
 
-Ensure `require` is present in `composer.json`, you can add it with the
-following command:
 ```
-php composer.phar require berarma/cakephp-redsys
+composer require your-name-here/Redsys
 ```
 
 ## Use
