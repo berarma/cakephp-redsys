@@ -24,15 +24,15 @@
  */
 namespace Berarma\Redsys\Lib;
 
-class Redsys {
-
+class Redsys
+{
     protected $settings;
 
     protected $params;
 
     protected $message;
 
-    public function __construct($settings, $params)
+    public function __construct($settings, array $params = [])
     {
         $this->settings = $settings;
         if (isset($params['Ds_SignatureVersion']) && isset($params['Ds_MerchantParameters']) && isset($params['Ds_Signature'])) {

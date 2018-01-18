@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/berarma/cakephp-redsys.svg?branch=master)](https://travis-ci.org/berarma/cakephp-redsys) [![Coverage Status](https://coveralls.io/repos/berarma/cakephp-redsys/badge.png?branch=master)](https://coveralls.io/r/berarma/cakephp-redsys?branch=master)
 
-# Redsys plugin for CakePHP
+# Redsýs plugin for CakePHP
 
 This plugin enables online payments using the Redsýs TPV service.
 
@@ -15,41 +15,38 @@ You can install this plugin into your CakePHP application using [composer](http:
 The recommended way to install composer packages is:
 
 ```
-composer require your-name-here/Redsys
+composer require berarma/cakephp-redsys
 ```
 
 ## Use
 
-Create your configuration:
+Load the component and configure:
 
 ```php
-$config = array(
-    'Redsys' => array(
-        // Use 'https://sis.redsys.es/sis/realizarPago' for the real environment
-        'url' => 'https://sis-t.redsys.es:25443/sis/realizarPago', // Testing
-        'secretKey' => 'QWERTYASDF0123456789',
-        'defaults' => [
-            'DS_MERCHANT_MERCHANTCODE' => '000000001',
-            'DS_MERCHANT_CURRENCY' => '978',
-            'DS_MERCHANT_TRANSACTIONTYPE' => '0',
-            'DS_MERCHANT_TERMINAL' => '001',
-            'DS_MERCHANT_MERCHANTURL' => 'http://example.com/notification',
-            'DS_MERCHANT_URLOK' => 'http://example.com/ok',
-            'DS_MERCHANT_URLKO' => 'http://example.com/ko',
-        ],
-    )
-);
+$this->loadComponent('Berarma/Redsys.Redsys', [
+    // Use 'https://sis.redsys.es/sis/realizarPago' for the real environment
+    'url' => 'https://sis-t.redsys.es:25443/sis/realizarPago', // Testing
+    'secretKey' => 'QWERTYASDF0123456789',
+    'defaults' => [
+        'DS_MERCHANT_MERCHANTCODE' => '000000001',
+        'DS_MERCHANT_CURRENCY' => '978',
+        'DS_MERCHANT_TRANSACTIONTYPE' => '0',
+        'DS_MERCHANT_TERMINAL' => '001',
+        'DS_MERCHANT_MERCHANTURL' => 'http://example.com/notification',
+        'DS_MERCHANT_URLOK' => 'http://example.com/ok',
+        'DS_MERCHANT_URLKO' => 'http://example.com/ko',
+    ],
+]);
 ```
 
 This is a basic configuration example. The defaults array will be merged with
 any parameters passed in the requests. Please, read the Redsýs documentation to
 learn about all the optional parameters that can be used.
 
-Setting things up in the Controller:
+Load the helper:
 
 ```php
-public $components = array('Redsys.Redsys');
-public $helpers = array('Redsys.Redsys');
+$this->loadHelper('Berarma/Redsys.Redsys');
 ```
 
 Initiating a transaction in the Controller:
@@ -64,8 +61,8 @@ $this->Redsys->request([
 Rendering the form that sends the user to the TPV in the View:
 
 ```php
-<?php echo $this->Redsys->renderForm(array('id' => 'redsys_form', 'target' => '_blank')); ?>
-<?php echo $this->Html->scriptBlock('$( "#redsys_form" ).submit();'); ?>
+<?php echo $this->Redsys->renderForm(['id' => 'redsys-form', 'target' => '_blank']); ?>
+<?php echo $this->Html->scriptBlock('document.getElementById('redsys-form').submit();'); ?>
 ```
 
 Getting the response in the Controller:
@@ -80,14 +77,12 @@ The parameters from the response can then be accessed with:
 $response->get('DS_ORDER');
 ```
 
-See the Test files to find more use examples.
-
 ## Case sensitivity of parameters
 
 The specification states that parameter names should use upper case or a mixed
 style of CamelCase and underline characters. Since the mixed
 CamelCase/underline style is confusing to say the least, and having 2 different
-naming styles added to that confusion, I've decided to use the upper case style
+naming styles adds to the confusion, I've decided to use the upper case style
 everywhere. That means all parameter names feeded to this plugin are converted
 to upper case, it doesn't matter how they were.
 

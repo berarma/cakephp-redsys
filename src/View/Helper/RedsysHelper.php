@@ -26,8 +26,8 @@ namespace Berarma\Redsys\View\Helper;
 
 use Cake\View\Helper;
 
-class RedsysHelper extends Helper {
-
+class RedsysHelper extends Helper
+{
     public $helpers = ['Form'];
 
     /**
@@ -36,7 +36,8 @@ class RedsysHelper extends Helper {
      * @param array $options Form options
      * @return string Form
      */
-    public function renderForm($options = []) {
+    public function renderForm($options = [])
+    {
         $options['url'] = $this->request->getData('Redsys.url');
         $options += [
             'templates' => []
@@ -50,4 +51,3 @@ class RedsysHelper extends Helper {
         return $output;
     }
 }
-

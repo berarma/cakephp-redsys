@@ -32,13 +32,13 @@ use Cake\Http\ServerRequest;
 use Cake\Http\Response;
 use Cake\TestSuite\TestCase;
 
-class RedsysComponentTest extends TestCase {
-
+class RedsysComponentTest extends TestCase
+{
     public $controller;
 
     public $component;
 
-    public $settings = array(
+    public $settings = [
         'url' => 'https://sis-t.redsys.es:25443/sis/realizarPago',
         //'url' => 'https://sis.redsys.es/sis/realizarPago',
         'secretKey' => 'Mk9m98IfEblmPfrpsawt7BmxObt98Jev',
@@ -48,9 +48,9 @@ class RedsysComponentTest extends TestCase {
             'DS_MERCHANT_MERCHANTCODE' => '000000083',
             'DS_MERCHANT_MERCHANTURL' => 'http://example.com/notification',
         ],
-    );
+    ];
 
-    public $responseParams = array(
+    public $responseParams = [
         'Ds_Date' => '01/01/2000',
         'Ds_Hour' => '08:00',
         'Ds_Amount' => '349812',
@@ -66,24 +66,33 @@ class RedsysComponentTest extends TestCase {
         'Ds_AuthorisationCode' => '11111',
         'Ds_ConsumerLanguage' => '1',
         'Ds_Card_Type' => 'C',
-    );
+    ];
 
-    public $response = array(
+    public $response = [
         'Ds_SignatureVersion' => 'HMAC_SHA256_V1',
         'Ds_Signature' => 'IVHvFC2_y-cyq45xbB9NIhCRUm7fYZLT0uNXcNEdefQ=',
         'Ds_MerchantParameters' => '',
-    );
+    ];
 
-    public function setUp() {
+    public function setUp()
+    {
         parent::setUp();
         $this->response['Ds_MerchantParameters'] = strtr(base64_encode(json_encode($this->responseParams)), '+/', '-_');
     }
 
-    public function tearDown() {
+    public function tearDown()
+    {
         parent::tearDown();
     }
 
-    public function testRequest() {
+    public function testGet()
+    {
+        $this->buildObjects();
+        $this->assertEquals($this->settings['defaults']['DS_MERCHANT_TERMINAL'], $this->component->get('DS_MERCHANT_TERMINAL'));
+    }
+
+    public function testRequest()
+    {
         $this->buildObjects();
         $this->component->request([
             'DS_MERCHANT_AMOUNT' => '100',
@@ -93,9 +102,12 @@ class RedsysComponentTest extends TestCase {
         $this->assertEquals('eyJEU19NRVJDSEFOVF9BTU9VTlQiOiIxMDAiLCJEU19NRVJDSEFOVF9PUkRFUiI6IjM0OTgxMiIsIkRTX01FUkNIQU5UX1RFUk1JTkFMIjoiOTU2IiwiRFNfTUVSQ0hBTlRfQ1VSUkVOQ1kiOiI5NzgiLCJEU19NRVJDSEFOVF9NRVJDSEFOVENPREUiOiIwMDAwMDAwODMiLCJEU19NRVJDSEFOVF9NRVJDSEFOVFVSTCI6Imh0dHA6XC9cL2V4YW1wbGUuY29tXC9ub3RpZmljYXRpb24ifQ==', $this->controller->request->getData('Redsys.parameters'));
         $this->assertEquals('NfsLlcmorHgEQhqQxXr3N7QJcXftpIGFiEXCYHQGTLw=', $this->controller->request->getData('Redsys.signature'));
         $this->assertEquals('HMAC_SHA256_V1', $this->controller->request->getData('Redsys.signatureVersion'));
+        $this->assertEquals($this->settings['defaults']['DS_MERCHANT_TERMINAL'], $this->component->get('DS_MERCHANT_TERMINAL'));
+        $this->assertEquals(100, $this->component->get('DS_MERCHANT_AMOUNT'));
     }
 
-    public function testResponse() {
+    public function testResponse()
+    {
         $request = new ServerRequest(['post' => $this->response]);
         $request = $request->withMethod('POST');
         $this->buildObjects($request);
@@ -117,14 +129,16 @@ class RedsysComponentTest extends TestCase {
         $this->assertEquals($this->responseParams['Ds_Card_Type'], $response->get('DS_CARD_TYPE'));
     }
 
-    public function testPostException() {
+    public function testPostException()
+    {
         $request = new ServerRequest(['post' => $this->response]);
         $this->buildObjects($request);
         $this->expectException('\Cake\Network\Exception\MethodNotAllowedException');
         $response = $this->component->response();
     }
 
-    public function testSignatureException() {
+    public function testSignatureException()
+    {
         $data = $this->response;
         $data['Ds_Signature'] = '';
         $request = new ServerRequest(['post' => $data]);

@@ -31,17 +31,11 @@ use Cake\Controller\Controller;
 use Cake\Core\Configure;
 use Cake\Event\Event;
 
-class RedsysComponent extends Component {
+class RedsysComponent extends Component
+{
+    private $controller = null;
 
-    public $controller = null;
-
-    public function __construct(ComponentRegistry $registry, $config = [])
-    {
-        if (Configure::check('Redsys')) {
-            $config += Configure::read('Redsys');
-        }
-        parent::__construct($registry, $config);
-    }
+    private $redsys = null;
 
     /**
      * {@inheritDoc}
@@ -49,6 +43,7 @@ class RedsysComponent extends Component {
     public function startup(Event $event)
     {
         $this->controller = $event->getSubject();
+        $this->redsys = new Redsys($this->getConfig());
     }
 
     /**
@@ -59,14 +54,14 @@ class RedsysComponent extends Component {
      * @param string $transactionType Type of transaction
      * @return null
      */
-    public function request($params)
+    public function request(array $params = [])
     {
-        $Redsys = new Redsys($this->getConfig(), $params);
+        $this->redsys = new Redsys($this->getConfig(), $params);
         $data = [
-            'url' => $Redsys->getUrl(),
-            'parameters' => $Redsys->getMessage(),
-            'signature' => $Redsys->getSignature(),
-            'signatureVersion' => $Redsys->getVersion(),
+            'url' => $this->redsys->getUrl(),
+            'parameters' => $this->redsys->getMessage(),
+            'signature' => $this->redsys->getSignature(),
+            'signatureVersion' => $this->redsys->getVersion(),
         ];
         $this->controller->request = $this->controller->request->withData('Redsys', $data);
     }
@@ -84,6 +79,17 @@ class RedsysComponent extends Component {
         }
         $Redsys = new Redsys($this->getConfig(), $this->controller->request->getData());
         return $Redsys;
+    }
+
+    /**
+     * Get request param
+     *
+     * @param string $name Param name
+     * @return string Param value
+     */
+    public function get($name)
+    {
+        return $this->redsys->get($name);
     }
 }
 

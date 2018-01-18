@@ -31,18 +31,19 @@ use Cake\Http\Response;
 use Cake\TestSuite\TestCase;
 use Cake\View\View;
 
-class RedsysHelperTest extends TestCase {
-
+class RedsysHelperTest extends TestCase
+{
     public $helper = null;
 
-    public $data = [ 
+    public $data = [
         'url' =>  'https://sis-t.redsys.es:25443/sis/realizarPago',
         'parameters' => 'eyJEU19NRVJDSEFOVF9BTU9VTlQiOiIxMDAiLCJEU19NRVJDSEFOVF9PUkRFUiI6IjM0OTgxMiIsIkRzX01lcmNoYW50X1Rlcm1pbmFsIjoiOTU2IiwiRHNfTWVyY2hhbnRfQ3VycmVuY3kiOiI5NzgiLCJEc19NZXJjaGFudF9NZXJjaGFudENvZGUiOiIwMDAwMDAwODMiLCJEc19NZXJjaGFudF9NZXJjaGFudFVSTCI6Imh0dHA6XC9cL2V4YW1wbGUuY29tXC9ub3RpZmljYXRpb24ifQ',
         'signature' => 'R+7sDHIakXvroq31yg8dPAPLqg0WbaGS3tA2dT7iVcc=',
         'signatureVersion' => 'HMAC_SHA256_V1',
     ];
 
-    public function setUp() {
+    public function setUp()
+    {
         parent::setUp();
         $request = new ServerRequest();
         $request = $request->withData('Redsys', $this->data);
@@ -51,12 +52,14 @@ class RedsysHelperTest extends TestCase {
         $this->helper = new RedsysHelper($view);
     }
 
-    public function tearDown() {
+    public function tearDown()
+    {
         parent::tearDown();
         unset($this->helper);
     }
 
-    public function testRenderForm() {
+    public function testRenderForm()
+    {
         $expected = [
             ['form' => ['action' => $this->data['url'], 'method' => 'post', 'accept-charset']],
             ['input' => ['type' => 'hidden', 'name' => 'Ds_MerchantParameters', 'value' => 'eyJEU19NRVJDSEFOVF9BTU9VTlQiOiIxMDAiLCJEU19NRVJDSEFOVF9PUkRFUiI6IjM0OTgxMiIsIkRzX01lcmNoYW50X1Rlcm1pbmFsIjoiOTU2IiwiRHNfTWVyY2hhbnRfQ3VycmVuY3kiOiI5NzgiLCJEc19NZXJjaGFudF9NZXJjaGFudENvZGUiOiIwMDAwMDAwODMiLCJEc19NZXJjaGFudF9NZXJjaGFudFVSTCI6Imh0dHA6XC9cL2V4YW1wbGUuY29tXC9ub3RpZmljYXRpb24ifQ']],
