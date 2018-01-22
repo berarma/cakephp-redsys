@@ -61,8 +61,8 @@ $this->Redsys->request([
 Rendering the form that sends the user to the TPV in the View:
 
 ```php
-<?php echo $this->Redsys->renderForm(['id' => 'redsys-form', 'target' => '_blank']); ?>
-<?php echo $this->Html->scriptBlock('document.getElementById('redsys-form').submit();'); ?>
+<?php echo $this->Redsys->renderForm(['id' => 'redsys-form']); ?>
+<?php echo $this->Html->scriptBlock('document.getElementById("redsys-form").submit();'); ?>
 ```
 
 Getting the response in the Controller:
