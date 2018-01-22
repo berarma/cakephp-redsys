@@ -13,11 +13,12 @@
     ],
     "require": {
         "php": ">=5.2.8",
-        "composer/installers": "*"
+        "composer/installers": "*",
+        "cakephp/cakephp": ">=2.0 <3.0"
     },
     "require-dev": {
         "cakephp/cakephp-codesniffer": "1.*",
-        "phpunit/phpunit": "*"
+        "phpunit/phpunit": "3.*"
     },
     "extra": {
         "installer-name": "Redsys"

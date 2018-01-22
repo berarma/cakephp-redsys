@@ -24,37 +24,29 @@ php composer.phar require berarma/cakephp-redsys
 
 ## Use
 
-Create your configuration:
+Setting things up in the Controller:
 
 ```php
-$config = array(
-    'Redsys' => array(
+public $components = array('Redsys.Redsys', array(
         // Use 'https://sis.redsys.es/sis/realizarPago' for the real environment
         'url' => 'https://sis-t.redsys.es:25443/sis/realizarPago', // Testing
         'secretKey' => 'QWERTYASDF0123456789',
         'defaults' => [
-            'DS_MERCHANT_MERCHANTCODE' => '000000001',
-            'DS_MERCHANT_CURRENCY' => '978',
-            'DS_MERCHANT_TRANSACTIONTYPE' => '0',
-            'DS_MERCHANT_TERMINAL' => '001',
-            'DS_MERCHANT_MERCHANTURL' => 'http://example.com/notification',
-            'DS_MERCHANT_URLOK' => 'http://example.com/ok',
-            'DS_MERCHANT_URLKO' => 'http://example.com/ko',
-        ],
-    )
+        'DS_MERCHANT_MERCHANTCODE' => '000000001',
+        'DS_MERCHANT_CURRENCY' => '978',
+        'DS_MERCHANT_TRANSACTIONTYPE' => '0',
+        'DS_MERCHANT_TERMINAL' => '001',
+        'DS_MERCHANT_MERCHANTURL' => 'http://example.com/notification',
+        'DS_MERCHANT_URLOK' => 'http://example.com/ok',
+        'DS_MERCHANT_URLKO' => 'http://example.com/ko',
+    ),
 );
+public $helpers = array('Redsys.Redsys');
 ```
 
 This is a basic configuration example. The defaults array will be merged with
 any parameters passed in the requests. Please, read the Redsýs documentation to
 learn about all the optional parameters that can be used.
-
-Setting things up in the Controller:
-
-```php
-public $components = array('Redsys.Redsys');
-public $helpers = array('Redsys.Redsys');
-```
 
 Initiating a transaction in the Controller:
 
@@ -68,8 +60,8 @@ $this->Redsys->request([
 Rendering the form that sends the user to the TPV in the View:
 
 ```php
-<?php echo $this->Redsys->renderForm(array('id' => 'redsys_form', 'target' => '_blank')); ?>
-<?php echo $this->Html->scriptBlock('$( "#redsys_form" ).submit();'); ?>
+<?php echo $this->Redsys->renderForm(array('id' => 'redsys-form')); ?>
+<?php echo $this->Html->scriptBlock('document.getElementById("redsys-form").submit();'); ?>
 ```
 
 Getting the response in the Controller:
