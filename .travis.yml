@@ -11,11 +11,25 @@ cache:
     - vendor
     - $HOME/.composer/cache
 
+env:
+  global:
+    - DEFAULT=1
+    - CODE_COVERAGE=0
+
+matrix:
+  include:
+    - php: 7.2
+      env: DEFAULT=0 CODE_COVERAGE=1
+
 install:
   - composer update --prefer-dist --no-interaction
 
 script:
-  - vendor/bin/phpunit
+  - if [[ $DEFAULT = 1 ]]; then vendor/bin/phpunit; fi
+  - if [[ $CODE_COVERAGE = 1 ]]; then phpdbg -qrr vendor/bin/phpunit --coverage-clover=clover.xml; fi
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
 
 notifications:
   email: false
