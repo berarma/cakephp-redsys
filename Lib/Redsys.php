@@ -91,8 +91,14 @@ class Redsys extends CakeObject {
 		if ($key === null) {
 			$key = base64_decode($this->settings['secretKey']);
 		}
+		$order = $this->getOrder();
 		$iv = str_repeat("\0", 8);
-		$key = mcrypt_encrypt(MCRYPT_3DES, $key, $this->getOrder(), MCRYPT_MODE_CBC, $iv);
+		if (function_exists('openssl_encrypt')) {
+			$paddedLength = ceil(strlen($order) / 8) * 8;
+			$key = substr(openssl_encrypt(str_pad($order, $paddedLength, "\0"), 'des-ede3-cbc', $key, OPENSSL_RAW_DATA, $iv), 0, $paddedLength);
+		} else {
+			$key = mcrypt_encrypt(MCRYPT_3DES, $key, $order, MCRYPT_MODE_CBC, $iv);
+		}
 		return hash_hmac('sha256', $message, $key, true);
 	}
 
