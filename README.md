@@ -1,6 +1,7 @@
-[![Build Status](https://travis-ci.org/berarma/cakephp-redsys.svg?branch=master)](https://travis-ci.org/berarma/cakephp-redsys) [![Coverage Status](https://coveralls.io/repos/berarma/cakephp-redsys/badge.png?branch=master)](https://coveralls.io/r/berarma/cakephp-redsys?branch=master)
-
 # Redsýs plugin for CakePHP
+
+[![Build Status](https://travis-ci.com/berarma/cakephp-redsys.svg?branch=master)](https://travis-ci.com/berarma/cakephp-redsys)
+[![codecov](https://codecov.io/gh/berarma/cakephp-redsys/branch/master/graph/badge.svg)](https://codecov.io/gh/berarma/cakephp-redsys)
 
 This plugin enables online payments using the Redsýs TPV service.
 
