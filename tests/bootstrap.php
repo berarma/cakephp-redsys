@@ -69,4 +69,4 @@ $config = [
     'url' => getenv('db_dsn'),
     'timezone' => 'UTC',
 ];
-ConnectionManager::config('test', $config);
+ConnectionManager::setConfig('test', $config);

@@ -133,7 +133,7 @@ class RedsysComponentTest extends TestCase
     {
         $request = new ServerRequest(['post' => $this->response]);
         $this->buildObjects($request);
-        $this->expectException('\Cake\Network\Exception\MethodNotAllowedException');
+        $this->expectException('\Cake\Http\Exception\MethodNotAllowedException');
         $response = $this->component->response();
     }
 

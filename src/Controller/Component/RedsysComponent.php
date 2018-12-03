@@ -75,7 +75,7 @@ class RedsysComponent extends Component
     public function response()
     {
         if (!$this->controller->request->is('post')) {
-            throw new \Cake\Network\Exception\MethodNotAllowedException("Redsys notification not using POST.");
+            throw new \Cake\Http\Exception\MethodNotAllowedException("Redsys notification not using POST.");
         }
         $Redsys = new Redsys($this->getConfig(), $this->controller->request->getData());
         return $Redsys;
