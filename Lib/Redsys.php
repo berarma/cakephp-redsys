@@ -23,7 +23,7 @@
  * @license http://www.gnu.org/licenses/gpl-2.0.html GPLv2
  */
 
-class Redsys extends Object {
+class Redsys extends CakeObject {
 
 	protected $settings;
 
