@@ -29,7 +29,7 @@ matrix:
 
 install:
   - git clone git://github.com/cakephp/cakephp ../cakephp && cd ../cakephp && git checkout $CAKE_REF
-  - cp -R ../asset_compress plugins/$PLUGIN_NAME
+  - cp -R ../cakephp-redsys plugins/$PLUGIN_NAME
   - chmod -R 777 ../cakephp/app/tmp
   - composer require "phpunit/phpunit=3.*||4.*||5.*"
   - echo "require_once dirname(APP) . DS . 'vendors' . DS . 'autoload.php';" >> app/Config/bootstrap.php
