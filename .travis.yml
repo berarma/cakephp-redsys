@@ -35,7 +35,7 @@ install:
 
 script:
   - if [[ "$DEFAULT" == "1" ]]; then ./lib/Cake/Console/cake test $PLUGIN_NAME All${PLUGIN_NAME} --stderr; fi
-  - if [[ "$CODE_COVERAGE" == "1" ]]; then ./lib/Cake/Console/cake test $PLUGIN_NAME All${PLUGIN_NAME} --stderr --coverage-clover clover.xml; fi
+  - if [[ "$CODE_COVERAGE" == "1" ]]; then ./lib/Cake/Console/cake test $PLUGIN_NAME All${PLUGIN_NAME} --stderr --coverage-clover ../cakephp-redsys/clover.xml; fi
   - if [[ "$PHPCS" == "1" ]]; then vendors/bin/phpcs --config-set installed_paths vendors/cakephp/cakephp-codesniffer; fi
   - if [[ "$PHPCS" == "1" ]]; then vendors/bin/phpcs -p --extensions=php --standard=CakePHP --ignore=vendor/ plugins/$PLUGIN_NAME; fi
 
