@@ -14,8 +14,6 @@ env:
   global:
     - PLUGIN_NAME=Redsys
     - DEFAULT=1
-
-  matrix:
     - CAKE_REF=2.10.13
 
 matrix:
