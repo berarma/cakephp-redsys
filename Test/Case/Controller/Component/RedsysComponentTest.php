@@ -124,13 +124,13 @@ class RedsysComponentTest extends CakeTestCase {
 	}
 
 	public function testPostException() {
-		$this->expectExceptionMessage('POST', 'CakeException');
+		$this->setExpectedException('CakeException', 'POST');
 		$this->Controller->request->data = $this->response;
 		$response = $this->RedsysComponent->response();
 	}
 
 	public function testSignatureException() {
-		$this->expectExceptionMessage('invalid signature', 'Exception');
+		$this->setExpectedException('Exception', 'invalid signature');
 		$_SERVER['REQUEST_METHOD'] = 'POST';
 		$this->Controller->request->data = $this->response;
 		$this->Controller->request->data['Ds_Signature'] = '';
