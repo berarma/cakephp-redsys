@@ -28,13 +28,14 @@ matrix:
 install:
   - git clone git://github.com/cakephp/cakephp ../cakephp && cd ../cakephp && git checkout $CAKE_REF
   - cp -R ../cakephp-redsys plugins/$PLUGIN_NAME
+  - cp ../cakephp-redsys/Test/phpunit.xml .
   - chmod -R 777 ../cakephp/app/tmp
   - composer require "phpunit/phpunit=3.*||4.*||5.*"
   - echo "require_once dirname(APP) . DS . 'vendors' . DS . 'autoload.php';" >> app/Config/bootstrap.php
 
 script:
   - if [[ "$DEFAULT" == "1" ]]; then ./lib/Cake/Console/cake test $PLUGIN_NAME All${PLUGIN_NAME} --stderr; fi
-  - if [[ "$CODE_COVERAGE" == "1" ]]; then phpdbg -qrr vendors/bin/phpunit --coverage-clover=clover.xml; fi
+  - if [[ "$CODE_COVERAGE" == "1" ]]; then ./lib/Cake/Console/cake test $PLUGIN_NAME All${$PLUGIN_NAME} --stderr --coverage-clover clover.xml; fi
   - if [[ "$PHPCS" == "1" ]]; then vendors/bin/phpcs --config-set installed_paths vendors/cakephp/cakephp-codesniffer; fi
   - if [[ "$PHPCS" == "1" ]]; then vendors/bin/phpcs -p --extensions=php --standard=CakePHP --ignore=vendor/ plugins/$PLUGIN_NAME; fi
 

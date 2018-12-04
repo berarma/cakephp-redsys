@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit>
+<filter>
+    <whitelist>
+        <directory suffix=".php">plugins/Redsys</directory>
+        <exclude>
+            <directory suffix=".php">plugins/Redsys/Test</directory>
+            <directory suffix=".php">plugins/Redsys/vendor</directory>
+        </exclude>
+    </whitelist>
+</filter>
+</phpunit>
