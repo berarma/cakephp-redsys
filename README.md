@@ -7,7 +7,7 @@ This plugin enables online payments using the Redsýs TPV service.
 
 ## Requirements
 
-* CakePHP 2.x
+* CakePHP 2.9+
 
 ## Installation
 
@@ -17,8 +17,7 @@ This plugin enables online payments using the Redsýs TPV service.
 
 ### Using Composer
 
-Ensure `require` is present in `composer.json`, you can add it with the
-following command:
+Execute:
 ```
 php composer.phar require berarma/cakephp-redsys
 ```
