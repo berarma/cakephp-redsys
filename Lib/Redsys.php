@@ -25,73 +25,110 @@
 
 class Redsys extends CakeObject {
 
-	protected $settings;
+	protected $_settings;
 
-	protected $params;
+	protected $_params;
 
-	protected $message;
+	protected $_message;
 
-	public function __construct($settings, $params)
-	{
-		$this->settings = $settings;
+/**
+ * Constructor
+ *
+ * @param array $settings Default settings
+ * @param array $params Specific parameters
+ * @throws Exception
+ */
+	public function __construct($settings, $params) {
+		$this->_settings = $settings;
 		if (isset($params['Ds_SignatureVersion']) && isset($params['Ds_MerchantParameters']) && isset($params['Ds_Signature'])) {
 			if ($params['Ds_SignatureVersion'] !== $this->getVersion()) {
 				throw new Exception("Redsys: invalid signature version.");
 			}
-			$this->message = $params['Ds_MerchantParameters'];
-			$this->params = array_change_key_case(json_decode($this->decodeBase64url($this->message), true), CASE_UPPER);
-			if ($this->hash($this->message) !== $this->decodeBase64url($params['Ds_Signature'])) {
+			$this->_message = $params['Ds_MerchantParameters'];
+			$this->_params = array_change_key_case(json_decode($this->_decodeBase64url($this->_message), true), CASE_UPPER);
+			if ($this->_hash($this->_message) !== $this->_decodeBase64url($params['Ds_Signature'])) {
 				throw new Exception("Redsys: invalid signature.");
 			}
 		} else {
-			if (isset($this->settings['defaults'])) {
-				$params += $this->settings['defaults'];
+			if (isset($this->_settings['defaults'])) {
+				$params += $this->_settings['defaults'];
 			}
-			$this->params = array_change_key_case($params, CASE_UPPER);
-			$this->message = base64_encode(json_encode($this->params));
+			$this->_params = array_change_key_case($params, CASE_UPPER);
+			$this->_message = base64_encode(json_encode($this->_params));
 		}
 	}
 
-	public function getUrl()
-	{
-		return $this->settings['url'];
+/**
+ * Get configured URL
+ *
+ * @return string URL
+ */
+	public function getUrl() {
+		return $this->_settings['url'];
 	}
 
-	public function getVersion()
-	{
+/**
+ * Get version
+ *
+ * @return string Version string
+ */
+	public function getVersion() {
 		return 'HMAC_SHA256_V1';
 	}
 
-	public function getMessage()
-	{
-		return $this->message;
+/**
+ * Get the message to be sent
+ *
+ * @return string Message
+ */
+	public function getMessage() {
+		return $this->_message;
 	}
 
-	public function getSignature()
-	{
-		return base64_encode($this->hash($this->message));
+/**
+ * Get the signature string
+ *
+ * @return string Signature
+ */
+	public function getSignature() {
+		return base64_encode($this->_hash($this->_message));
 	}
 
-	public function get($param)
-	{
+/**
+ * Get parameter value
+ *
+ * @param string $param Param name
+ * @return string Param value
+ */
+	public function get($param) {
 		$param = strtoupper($param);
-		if (isset($this->params[$param])) {
-			return $this->params[$param];
+		if (isset($this->_params[$param])) {
+			return $this->_params[$param];
 		}
 		return null;
 	}
 
-	public function getData()
-	{
-		return $this->params;
+/**
+ * Get all parameters
+ *
+ * @return array All the parameters
+ */
+	public function getData() {
+		return $this->_params;
 	}
 
-	protected function hash($message, $key = null)
-	{
+/**
+ * Calculate hash for a message string
+ *
+ * @param string $message Message
+ * @param string $key Key
+ * @return string Hash
+ */
+	protected function _hash($message, $key = null) {
 		if ($key === null) {
-			$key = base64_decode($this->settings['secretKey']);
+			$key = base64_decode($this->_settings['secretKey']);
 		}
-		$order = $this->getOrder();
+		$order = $this->_getOrder();
 		$iv = str_repeat("\0", 8);
 		if (function_exists('openssl_encrypt')) {
 			$paddedLength = ceil(strlen($order) / 8) * 8;
@@ -102,26 +139,40 @@ class Redsys extends CakeObject {
 		return hash_hmac('sha256', $message, $key, true);
 	}
 
-	protected function getOrder()
-	{
+/**
+ * Get Order Id
+ *
+ * @return string Order Id
+ */
+	protected function _getOrder() {
 		$order = $this->get('DS_MERCHANT_ORDER');
 		if ($order !== null) {
 			return $order;
 		}
 		$order = $this->get('DS_ORDER');
-		if ($order !== null){
+		if ($order !== null) {
 			return $order;
 		}
 		return null;
 	}
 
-	protected function encodeBase64url($data)
-	{
+/**
+ * URL encode to Base64
+ *
+ * @param string $data Text to encode
+ * @return string Encoded text
+ */
+	protected function _encodeBase64url($data) {
 		return strtr(base64_encode($data), '+/', '-_');
 	}
 
-	protected function decodeBase64url($data)
-	{
+/**
+ * URL decode from Base64
+ *
+ * @param string $data Text to decode
+ * @return string Decoded text
+ */
+	protected function _decodeBase64url($data) {
 		return base64_decode(strtr($data, '-_', '+/'));
 	}
 }

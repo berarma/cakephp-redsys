@@ -39,7 +39,7 @@ class RedsysHelper extends AppHelper {
 		$output = preg_replace('/<div.*/', '', $output);
 		$output .= $this->Form->hidden('Ds_MerchantParameters', array('name' => 'Ds_MerchantParameters', 'value' => $this->request->params['RedsysParameters']));
 		$output .= $this->Form->hidden('Ds_Signature', array('name' => 'Ds_Signature', 'value' => $this->request->params['RedsysSignature']));
-		$output .= $this->Form->hidden('Ds_SignatureVersion', array('name' => 'Ds_SignatureVersion','value' => $this->request->params['RedsysSignatureVersion']));
+		$output .= $this->Form->hidden('Ds_SignatureVersion', array('name' => 'Ds_SignatureVersion', 'value' => $this->request->params['RedsysSignatureVersion']));
 		$output .= $this->Form->end();
 		return $output;
 	}

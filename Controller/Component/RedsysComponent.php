@@ -40,9 +40,7 @@ class RedsysComponent extends Component {
 /**
  * Starts new transaction
  *
- * @param string $order Order reference
- * @param string $amount Transaction amount
- * @param string $transactionType Type of transaction
+ * @param array $params Transaction parameters
  * @return null
  */
 	public function request($params) {
