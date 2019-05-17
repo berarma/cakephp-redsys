@@ -60,13 +60,3 @@ Configure::write('App', [
 Configure::write('Session', [
     'defaults' => 'php'
 ]);
-
-// Ensure default test connection is defined
-if (!getenv('db_dsn')) {
-    putenv('db_dsn=sqlite:///:memory:');
-}
-$config = [
-    'url' => getenv('db_dsn'),
-    'timezone' => 'UTC',
-];
-ConnectionManager::setConfig('test', $config);
