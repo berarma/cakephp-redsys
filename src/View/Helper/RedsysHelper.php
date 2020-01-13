@@ -38,7 +38,7 @@ class RedsysHelper extends Helper
      */
     public function renderForm($options = [])
     {
-        $options['url'] = $this->request->getData('Redsys.url');
+        $options['url'] = $this->getView()->getRequest()->getData('Redsys.url');
         $options += [
             'templates' => []
         ];
