@@ -3,11 +3,11 @@
 [![Build Status](https://travis-ci.com/berarma/cakephp-redsys.svg?branch=master)](https://travis-ci.com/berarma/cakephp-redsys)
 [![codecov](https://codecov.io/gh/berarma/cakephp-redsys/branch/master/graph/badge.svg)](https://codecov.io/gh/berarma/cakephp-redsys)
 
-This plugin enables online payments using the Redsýs TPV service.
+CakePHP plugin implementing the Redsýs TPV service API.
 
 ## Requirements
 
-* CakePHP 3.4
+* CakePHP 3.4+
 
 ## Installation
 
