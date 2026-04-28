@@ -31,14 +31,15 @@ public $components = array('Redsys.Redsys', array(
         // Use 'https://sis.redsys.es/sis/realizarPago' for the real environment
         'url' => 'https://sis-t.redsys.es:25443/sis/realizarPago', // Testing
         'secretKey' => 'QWERTYASDF0123456789',
-        'defaults' => [
-        'DS_MERCHANT_MERCHANTCODE' => '000000001',
-        'DS_MERCHANT_CURRENCY' => '978',
-        'DS_MERCHANT_TRANSACTIONTYPE' => '0',
-        'DS_MERCHANT_TERMINAL' => '001',
-        'DS_MERCHANT_MERCHANTURL' => 'http://example.com/notification',
-        'DS_MERCHANT_URLOK' => 'http://example.com/ok',
-        'DS_MERCHANT_URLKO' => 'http://example.com/ko',
+        'defaults' => array(
+        	'DS_MERCHANT_MERCHANTCODE' => '000000001',
+        	'DS_MERCHANT_CURRENCY' => '978',
+        	'DS_MERCHANT_TRANSACTIONTYPE' => '0',
+        	'DS_MERCHANT_TERMINAL' => '001',
+        	'DS_MERCHANT_MERCHANTURL' => 'http://example.com/notification',
+        	'DS_MERCHANT_URLOK' => 'http://example.com/ok',
+        	'DS_MERCHANT_URLKO' => 'http://example.com/ko',
+				),
     ),
 );
 public $helpers = array('Redsys.Redsys');
